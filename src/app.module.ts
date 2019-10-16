@@ -1,15 +1,17 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TypegooseModule } from "nestjs-typegoose";
 import { UserModule } from './user/user.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UsersService } from './user/users.service';
 @Module({
   imports: [
-    TypegooseModule.forRoot('mongodb://localhost:27017/forum', {
+    MongooseModule.forRoot('mongodb://localhost/nest-blog', {
+      useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }),
-    UserModule
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
